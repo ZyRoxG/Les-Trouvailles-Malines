@@ -2,6 +2,8 @@ backend:
   name: git-gateway
   branch: main
 
+# Le CMS enregistre les images téléversées ici, et le site les sert
+# à cette même adresse relative (dossier public/ copié tel quel par Vite).
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
@@ -24,6 +26,8 @@ collections:
     folder: "content/produits"
     create: true
     slug: "{{slug}}"
+    extension: "json"
+    format: "json"
     identifier_field: "name"
     summary: "{{name}} — {{price}}"
     fields:
@@ -67,6 +71,8 @@ collections:
     folder: "content/inspirations"
     create: true
     slug: "{{slug}}"
+    extension: "json"
+    format: "json"
     identifier_field: "title"
     summary: "{{title}}"
     fields:
