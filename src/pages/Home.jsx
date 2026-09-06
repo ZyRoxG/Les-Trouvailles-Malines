@@ -8,10 +8,10 @@ import ProductCard from "@/components/ProductCard";
 import InspirationCard from "@/components/InspirationCard";
 import { PIECE_CATEGORIES, TROUVAILLE_CATEGORIES } from "@/lib/categories";
 import { useProducts, useInspirations } from "@/hooks/useContent";
+import settings from "../../content/settings.json";
 
-const U = "https://media.db.com/images/public/6a9c4565c1fb582e32cb4e2f/";
-const HERO_IMG = `${U}6335fe897_generated_77f87335.jpg`;
-const ABOUT_IMG = `${U}442d08812_generated_17fafe17.jpg`;
+const HERO_IMG = settings.hero_image;
+const ABOUT_IMG = settings.about_image;
 
 export default function Home() {
   const { items: products } = useProducts({}, 200);
