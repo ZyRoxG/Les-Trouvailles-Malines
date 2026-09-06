@@ -1,0 +1,11 @@
+{
+  "name": "Lampe de table en céramique beige",
+  "description": "Une lumière douce et chaleureuse pour les soirées d'hiver.",
+  "price": "39,00 €",
+  "image_url": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800",
+  "amazon_url": "https://www.amazon.fr/",
+  "label": "Trouvaille maline",
+  "group": "piece",
+  "category": "chambre",
+  "featured": true
+}

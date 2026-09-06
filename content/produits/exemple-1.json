@@ -1,0 +1,11 @@
+{
+  "name": "Panier de rangement en jonc de mer",
+  "description": "Un panier tressé à la main, parfait pour ranger plaids et magazines sans encombrer le salon.",
+  "price": "24,90 €",
+  "image_url": "https://images.unsplash.com/photo-1584589167171-541ce45f1eea?w=800",
+  "amazon_url": "https://www.amazon.fr/",
+  "label": "Coup de cœur",
+  "group": "piece",
+  "category": "salon",
+  "featured": true
+}

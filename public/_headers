@@ -1,0 +1,8 @@
+# Autorise l'intégration du site dans une iframe (ex. sur WordPress).
+# Sans ce fichier, certains navigateurs bloquent l'affichage en frame.
+# ATTENTION sécurité : "frame-ancestors *" autorise N'IMPORTE QUEL site
+# à t'intégrer en iframe (clickjacking possible). Si tu veux limiter
+# l'intégration à ton seul site WordPress, remplace la ligne CSP par :
+#   Content-Security-Policy: frame-ancestors 'self' https://tonsite.fr;
+/*
+  Content-Security-Policy: frame-ancestors *;

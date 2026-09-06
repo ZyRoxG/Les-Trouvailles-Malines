@@ -1,0 +1,74 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Le CMS enregistre les images téléversées ici, et le site les sert
+# à cette même adresse relative (dossier public/ copié tel quel par Vite).
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+locale: "fr"
+
+collections:
+  - name: "produits"
+    label: "Produits"
+    label_singular: "Produit"
+    folder: "content/produits"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "name"
+    summary: "{{name}} — {{price}}"
+    fields:
+      - { label: "Nom du produit", name: "name", widget: "string" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Prix affiché", name: "price", widget: "string", required: false, hint: "ex. 24,90 €" }
+      - { label: "Photo du produit", name: "image_url", widget: "image" }
+      - { label: "Lien d'affiliation Amazon", name: "amazon_url", widget: "string" }
+      - label: "Label"
+        name: "label"
+        widget: "select"
+        required: false
+        options: ["", "Coup de cœur", "Trouvaille maline", "Petit prix"]
+      - label: "Rubrique"
+        name: "group"
+        widget: "select"
+        options:
+          - { label: "Pièce par pièce", value: "piece" }
+          - { label: "Trouvailles malines", value: "trouvaille" }
+      - label: "Catégorie"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Salon", value: "salon" }
+          - { label: "Cuisine", value: "cuisine" }
+          - { label: "Chambre", value: "chambre" }
+          - { label: "Salle de bain", value: "salle_de_bain" }
+          - { label: "Bureau", value: "bureau" }
+          - { label: "Extérieur", value: "exterieur" }
+          - { label: "Petits prix", value: "petits_prix" }
+          - { label: "Moins de 20 €", value: "moins_de_20" }
+          - { label: "Pratiques au quotidien", value: "pratiques" }
+          - { label: "Rangement & organisation", value: "rangement" }
+          - { label: "Déco", value: "deco" }
+          - { label: "Confort", value: "confort" }
+      - { label: "Mettre à la une (page d'accueil)", name: "featured", widget: "boolean", default: false }
+
+  - name: "inspirations"
+    label: "Inspirations"
+    label_singular: "Inspiration"
+    folder: "content/inspirations"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    summary: "{{title}}"
+    fields:
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Résumé (extrait)", name: "excerpt", widget: "text", required: false }
+      - { label: "Image de couverture", name: "cover_image_url", widget: "image" }
+      - { label: "Contenu de l'article", name: "body", widget: "markdown" }
+      - label: "Produits associés (identifiants)"
+        name: "product_ids"
+        widget: "list"
+        required: false
+        hint: "Recopie l'identifiant (nom de fichier sans .json) des produits liés, un par ligne."
+      - { label: "Publié", name: "published", widget: "boolean", default: true }
