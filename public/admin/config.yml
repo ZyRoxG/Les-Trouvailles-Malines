@@ -9,7 +9,15 @@ public_folder: "/images/uploads"
 
 locale: "fr"
 
-collections:
+  - name: "reglages"
+    label: "Réglages du site"
+    files:
+      - label: "Images de l'accueil"
+        name: "images-accueil"
+        file: "content/settings.json"
+        fields:
+          - { label: "Image du bandeau (haut de l'accueil)", name: "hero_image", widget: "image" }
+          - { label: "Image de la section \"À propos\" (accueil)", name: "about_image", widget: "image" }collections:
   - name: "produits"
     label: "Produits"
     label_singular: "Produit"
