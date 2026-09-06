@@ -2,13 +2,12 @@ backend:
   name: git-gateway
   branch: main
 
-# Le CMS enregistre les images téléversées ici, et le site les sert
-# à cette même adresse relative (dossier public/ copié tel quel par Vite).
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 locale: "fr"
 
+collections:
   - name: "reglages"
     label: "Réglages du site"
     files:
@@ -17,7 +16,8 @@ locale: "fr"
         file: "content/settings.json"
         fields:
           - { label: "Image du bandeau (haut de l'accueil)", name: "hero_image", widget: "image" }
-          - { label: "Image de la section \"À propos\" (accueil)", name: "about_image", widget: "image" }collections:
+          - { label: "Image de la section \"À propos\" (accueil)", name: "about_image", widget: "image" }
+
   - name: "produits"
     label: "Produits"
     label_singular: "Produit"
