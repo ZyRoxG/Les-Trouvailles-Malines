@@ -1,0 +1,30 @@
+name: Extraire le zip
+
+on:
+  push:
+    paths:
+      - '**.zip'
+
+permissions:
+  contents: write
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extraire l'archive
+        run: |
+          for f in *.zip; do
+            unzip -o "$f" -d .
+            rm "$f"
+          done
+
+      - name: Enregistrer les fichiers extraits
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Extraction automatique du zip" || echo "Rien à valider"
+          git push
