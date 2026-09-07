@@ -1,26 +1,38 @@
-// Définition des catégories — éditable pour ajouter facilement de nouvelles rubriques.
-// Remplacez les images via le tableau de bord si vous le souhaitez.
+// Définition des catégories — les images sont désormais modifiables depuis
+// le panneau d'administration (/admin/ > Réglages du site > Photos des
+// catégories), stockées dans content/categories.json.
 
-const U = "https://media.db.com/images/public/6a9c4565c1fb582e32cb4e2f/";
+import categoriesContent from "../../content/categories.json";
 
-export const PIECE_CATEGORIES = [
-  { slug: "salon", label: "Salon", image: `${U}bea2506b0_generated_71574a05.jpg` },
-  { slug: "cuisine", label: "Cuisine", image: `${U}5b190c72b_generated_c48c0e4d.jpg` },
-  { slug: "chambre", label: "Chambre", image: `${U}c5ade79ce_generated_c4ad34f3.jpg` },
-  { slug: "salle_de_bain", label: "Salle de bain", image: `${U}df0ede7ca_generated_69900a70.jpg` },
-  { slug: "bureau", label: "Bureau", image: `${U}05bf3c1dd_generated_1c37b999.jpg` },
-  { slug: "exterieur", label: "Extérieur", image: `${U}bf1acc69f_generated_37352d43.jpg` },
-];
+const LABELS = {
+  salon: "Salon",
+  cuisine: "Cuisine",
+  chambre: "Chambre",
+  salle_de_bain: "Salle de bain",
+  bureau: "Bureau",
+  exterieur: "Extérieur",
+  petits_prix: "Petits prix",
+  moins_de_20: "Moins de 20 €",
+  pratiques: "Pratiques au quotidien",
+  rangement: "Rangement & organisation",
+  deco: "Déco",
+  confort: "Confort",
+};
 
-export const TROUVAILLE_CATEGORIES = [
-  { slug: "petits_prix", label: "Petits prix", image: `${U}f5c2d634b_generated_bd734e38.jpg` },
-  { slug: "moins_de_20", label: "Moins de 20 €", image: `${U}aaf98a59e_generated_a0ad42e3.jpg` },
-  { slug: "pratiques", label: "Pratiques au quotidien", image: `${U}89836cbf6_generated_3513f5c4.jpg` },
-  { slug: "rangement", label: "Rangement & organisation", image: `${U}fe916ad77_generated_903e82d2.jpg` },
-  { slug: "deco", label: "Déco", image: `${U}ba243f989_generated_2ff5795c.jpg` },
-  { slug: "confort", label: "Confort", image: `${U}ce10be677_generated_33ce3568.jpg` },
-];
+const PIECE_SLUGS = ["salon", "cuisine", "chambre", "salle_de_bain", "bureau", "exterieur"];
+const TROUVAILLE_SLUGS = ["petits_prix", "moins_de_20", "pratiques", "rangement", "deco", "confort"];
 
+function imageFor(slug) {
+  const entry = (categoriesContent.images || []).find((i) => i.slug === slug);
+  return entry ? entry.image : "";
+}
+
+function buildCategories(slugs) {
+  return slugs.map((slug) => ({ slug, label: LABELS[slug], image: imageFor(slug) }));
+}
+
+export const PIECE_CATEGORIES = buildCategories(PIECE_SLUGS);
+export const TROUVAILLE_CATEGORIES = buildCategories(TROUVAILLE_SLUGS);
 export const ALL_CATEGORIES = [...PIECE_CATEGORIES, ...TROUVAILLE_CATEGORIES];
 
 export function getCategory(slug) {
