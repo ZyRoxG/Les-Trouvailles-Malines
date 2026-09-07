@@ -1,9 +1,4 @@
-# Indispensable pour un site React (SPA) : sans cette regle, recharger une
-# page comme /a-propos ou /inspirations/mon-article renvoie une erreur 404,
-# car l'hebergeur chercherait un vrai fichier a cette adresse. Cette regle
-# sert toujours 200.html (copie d'index.html creee au build), qui laisse
-# ensuite React afficher la bonne page.
-# (On utilise "200.html", pas "index.html", car Cloudflare Pages bloque a
-# tort une regle qui pointerait directement vers index.html — voir
-# https://github.com/cloudflare/workers-sdk/issues/11824)
-/*    /200.html   200
+# Le renvoi vers la page d'accueil pour les adresses comme /a-propos est
+# désormais géré par le fichier wrangler.jsonc (réglage "not_found_handling":
+# "single-page-application"), la méthode officielle recommandée par
+# Cloudflare. Ce fichier n'a plus besoin de règle de renvoi.
