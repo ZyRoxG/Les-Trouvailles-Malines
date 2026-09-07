@@ -1,9 +1,11 @@
 backend:
   name: git-gateway
   branch: main
+  # Permet au panneau d'administration de fonctionner même s'il est consulté
+  # depuis un autre domaine que celui du site Netlify d'origine (ex. Cloudflare Pages).
+  identity_url: https://lestrouvaillesmalines.netlify.app/.netlify/identity
+  gateway_url: https://lestrouvaillesmalines.netlify.app/.netlify/git
 
-# Le CMS enregistre les images téléversées ici, et le site les sert
-# à cette même adresse relative (dossier public/ copié tel quel par Vite).
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
@@ -19,6 +21,13 @@ collections:
         fields:
           - { label: "Image du bandeau (haut de l'accueil)", name: "hero_image", widget: "image" }
           - { label: "Image de la section \"À propos\" (accueil)", name: "about_image", widget: "image" }
+      - label: "Page \"À propos\""
+        name: "texte-a-propos"
+        file: "content/apropos.json"
+        fields:
+          - { label: "Phrase d'introduction", name: "intro", widget: "string" }
+          - { label: "Image", name: "image", widget: "image" }
+          - { label: "Texte de la page", name: "body", widget: "markdown" }
 
   - name: "produits"
     label: "Produits"

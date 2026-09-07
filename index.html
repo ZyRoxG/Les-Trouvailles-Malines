@@ -6,7 +6,7 @@
     <meta name="description" content="Les Trouvailles Malines — de belles idées pour une maison plus douce, plus pratique et plus jolie. Trouvailles déco, rangement et inspirations pour l'intérieur." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <title>Les Trouvailles Malines — Idées déco pour une maison douce</title>
   </head>
   <body>
@@ -19,6 +19,12 @@
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script>
       if (window.netlifyIdentity) {
+        // Le panneau d'administration (Decap CMS) et l'authentification
+        // restent fournis par le site Netlify d'origine, même si le site
+        // public est désormais servi ailleurs (ex. Cloudflare Pages).
+        window.netlifyIdentity.init({
+          APIUrl: "https://lestrouvaillesmalines.netlify.app/.netlify/identity",
+        });
         window.netlifyIdentity.on("init", function (user) {
           if (!user) {
             window.netlifyIdentity.on("login", function () {
