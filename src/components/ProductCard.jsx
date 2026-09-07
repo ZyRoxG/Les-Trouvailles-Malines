@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { Image } from "@/components/ui/image";
 
@@ -14,7 +15,7 @@ export default function ProductCard({ product, size = "default" }) {
 
   return (
     <article className="group flex flex-col">
-      <div className={`relative overflow-hidden rounded-sm bg-card ${isLarge ? "aspect-[4/3]" : "aspect-[4/5]"}`}>
+      <Link to={`/produits/${product.id}`} className={`relative block overflow-hidden rounded-sm bg-card ${isLarge ? "aspect-[4/3]" : "aspect-[4/5]"}`}>
         <Image
           src={product.image_url}
           alt={product.name}
@@ -26,12 +27,14 @@ export default function ProductCard({ product, size = "default" }) {
             {product.label}
           </span>
         )}
-      </div>
+      </Link>
 
       <div className={`mt-5 flex flex-1 flex-col ${isLarge ? "max-w-md" : ""}`}>
-        <h3 className={`font-display font-light leading-snug text-foreground ${isLarge ? "text-2xl md:text-3xl" : "text-xl"}`}>
-          {product.name}
-        </h3>
+        <Link to={`/produits/${product.id}`}>
+          <h3 className={`font-display font-light leading-snug text-foreground transition-colors duration-300 hover:text-foreground/70 ${isLarge ? "text-2xl md:text-3xl" : "text-xl"}`}>
+            {product.name}
+          </h3>
+        </Link>
         {product.description && (
           <p className={`mt-3 leading-relaxed text-muted-foreground ${isLarge ? "text-[1rem]" : "text-[0.9rem]"}`}>
             {product.description}
@@ -42,7 +45,7 @@ export default function ProductCard({ product, size = "default" }) {
           {product.price ? (
             <span className="text-[0.85rem] font-light text-foreground/55">{product.price}</span>
           ) : <span />}
-          <a
+          
             href={product.amazon_url}
             target="_blank"
             rel="nofollow sponsored noopener noreferrer"

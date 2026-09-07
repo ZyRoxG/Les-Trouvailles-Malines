@@ -8,6 +8,7 @@ import PieceParPiece from "@/pages/PieceParPiece";
 import Trouvailles from "@/pages/Trouvailles";
 import Inspirations from "@/pages/Inspirations";
 import InspirationDetail from "@/pages/InspirationDetail";
+import ProduitDetail from "@/pages/ProduitDetail";
 import APropos from "@/pages/APropos";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/trouvailles" element={<Trouvailles />} />
           <Route path="/inspirations" element={<Inspirations />} />
           <Route path="/inspirations/:id" element={<InspirationDetail />} />
+          <Route path="/produits/:id" element={<ProduitDetail />} />
           <Route path="/a-propos" element={<APropos />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
