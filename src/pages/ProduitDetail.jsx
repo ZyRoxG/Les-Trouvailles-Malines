@@ -102,7 +102,7 @@ export default function ProduitDetail() {
               <p className="mt-6 text-[1.1rem] font-light text-foreground/70">{product.price}</p>
             )}
 
-            
+            <a
               href={product.amazon_url}
               target="_blank"
               rel="nofollow sponsored noopener noreferrer"
