@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Image } from "@/components/ui/image";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useContent";
 
@@ -15,6 +15,11 @@ export default function ProduitDetail() {
   const { id } = useParams();
   const { items: allProducts } = useProducts({}, 500);
   const product = allProducts.find((p) => p.id === id) || null;
+
+  const gallery = product
+    ? [product.image_url, ...(Array.isArray(product.gallery) ? product.gallery : [])].filter(Boolean)
+    : [];
+  const [activeImage, setActiveImage] = useState(0);
 
   if (!product) {
     return (
@@ -32,6 +37,7 @@ export default function ProduitDetail() {
   const similar = allProducts
     .filter((p) => p.id !== product.id && (p.category === product.category || p.group === product.group))
     .slice(0, 3);
+  const points = Array.isArray(product.points_forts) ? product.points_forts.filter(Boolean) : [];
 
   return (
     <div>
@@ -42,14 +48,31 @@ export default function ProduitDetail() {
         </Link>
 
         <div className="mt-8 grid gap-10 md:grid-cols-2 md:gap-16">
-          <div className="relative overflow-hidden rounded-sm bg-card">
-            <div className="aspect-[4/5]">
-              <Image src={product.image_url} alt={product.name} fittingType="fill" className="h-full w-full" />
+          <div>
+            <div className="relative overflow-hidden rounded-sm bg-card">
+              <div className="aspect-[4/5]">
+                <Image src={gallery[activeImage] || product.image_url} alt={product.name} fittingType="fill" className="h-full w-full" />
+              </div>
+              {product.label && (
+                <span className={`absolute left-4 top-4 label-caps px-3 py-1.5 ${labelStyle}`}>
+                  {product.label}
+                </span>
+              )}
             </div>
-            {product.label && (
-              <span className={`absolute left-4 top-4 label-caps px-3 py-1.5 ${labelStyle}`}>
-                {product.label}
-              </span>
+
+            {gallery.length > 1 && (
+              <div className="mt-4 grid grid-cols-5 gap-3">
+                {gallery.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveImage(i)}
+                    className={`aspect-square overflow-hidden rounded-sm border transition-colors ${i === activeImage ? "border-foreground" : "border-border/60 hover:border-foreground/40"}`}
+                    aria-label={`Voir la photo ${i + 1}`}
+                  >
+                    <Image src={img} alt="" fittingType="fill" className="h-full w-full" />
+                  </button>
+                ))}
+              </div>
             )}
           </div>
 
@@ -62,6 +85,17 @@ export default function ProduitDetail() {
               <p className="mt-6 text-[1.05rem] leading-relaxed text-muted-foreground">
                 {product.description}
               </p>
+            )}
+
+            {points.length > 0 && (
+              <ul className="mt-6 space-y-2.5">
+                {points.map((point, i) => (
+                  <li key={i} className="flex items-start gap-2.5 text-[0.95rem] text-foreground/80">
+                    <Check size={16} strokeWidth={1.75} className="mt-0.5 shrink-0 text-[hsl(var(--sage))]" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
             )}
 
             {product.price && (
