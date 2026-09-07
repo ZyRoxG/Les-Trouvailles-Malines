@@ -1,8 +1,6 @@
 backend:
   name: git-gateway
   branch: main
-  # Permet au panneau d'administration de fonctionner même s'il est consulté
-  # depuis un autre domaine que celui du site Netlify d'origine (ex. Cloudflare Pages).
   identity_url: https://lestrouvaillesmalines.netlify.app/.netlify/identity
   gateway_url: https://lestrouvaillesmalines.netlify.app/.netlify/git
 
@@ -28,6 +26,31 @@ collections:
           - { label: "Phrase d'introduction", name: "intro", widget: "string" }
           - { label: "Image", name: "image", widget: "image" }
           - { label: "Texte de la page", name: "body", widget: "markdown" }
+      - label: "Photos des catégories"
+        name: "photos-categories"
+        file: "content/categories.json"
+        fields:
+          - label: "Catégories"
+            name: "images"
+            widget: "list"
+            fields:
+              - label: "Catégorie"
+                name: "slug"
+                widget: "select"
+                options:
+                  - { label: "Salon", value: "salon" }
+                  - { label: "Cuisine", value: "cuisine" }
+                  - { label: "Chambre", value: "chambre" }
+                  - { label: "Salle de bain", value: "salle_de_bain" }
+                  - { label: "Bureau", value: "bureau" }
+                  - { label: "Extérieur", value: "exterieur" }
+                  - { label: "Petits prix", value: "petits_prix" }
+                  - { label: "Moins de 20 €", value: "moins_de_20" }
+                  - { label: "Pratiques au quotidien", value: "pratiques" }
+                  - { label: "Rangement & organisation", value: "rangement" }
+                  - { label: "Déco", value: "deco" }
+                  - { label: "Confort", value: "confort" }
+              - { label: "Photo", name: "image", widget: "image" }
 
   - name: "produits"
     label: "Produits"
@@ -42,8 +65,19 @@ collections:
     fields:
       - { label: "Nom du produit", name: "name", widget: "string" }
       - { label: "Description", name: "description", widget: "text", required: false }
+      - label: "Points forts"
+        name: "points_forts"
+        widget: "list"
+        required: false
+        hint: "Une ligne par point fort (comme les puces d'une fiche Amazon). Ex. « Lavable en machine », « Fabriqué en Europe »..."
       - { label: "Prix affiché", name: "price", widget: "string", required: false, hint: "ex. 24,90 €" }
-      - { label: "Photo du produit", name: "image_url", widget: "image" }
+      - { label: "Photo principale", name: "image_url", widget: "image" }
+      - label: "Photos supplémentaires"
+        name: "gallery"
+        widget: "list"
+        required: false
+        field: { label: "Photo", name: "image", widget: "image" }
+        hint: "Ajoute autant de photos que tu veux (autres angles, en situation, zoom...)."
       - { label: "Lien d'affiliation Amazon", name: "amazon_url", widget: "string" }
       - label: "Label"
         name: "label"
