@@ -45,7 +45,8 @@ export default function ProductCard({ product, size = "default" }) {
           {product.price ? (
             <span className="text-[0.85rem] font-light text-foreground/55">{product.price}</span>
           ) : <span />}
-          
+
+          <a
             href={product.amazon_url}
             target="_blank"
             rel="nofollow sponsored noopener noreferrer"
